@@ -8,10 +8,12 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class AlgoTest {
     private ParseString parseString;
+    private FindWrongBracket findWrongBracket;
 
     @Before
     public void setup(){
         parseString = new ParseString();
+        findWrongBracket = new FindWrongBracket();
     }
 
     @Test
@@ -26,8 +28,19 @@ public class AlgoTest {
 //        long result = parseString.change(wrong2);
 
 
-        assertThat(expected, is(parseString.change(input)));
-        assertThat(expected2, is(parseString.change(input2)));
+        assertThat(parseString.change(input), is(expected));
+        assertThat(parseString.change(input2), is(expected2));
+    }
+
+    @Test
+    public void 잘못된_괄호_찾기(){
+        String input  = "{())}";
+        String input2  = "({({{}{}{}}{}{}})})";
+        int expectedIndex = 3;
+        int expectedIndex2 = 15;
+
+        assertThat(findWrongBracket.find(input), is(expectedIndex));
+        assertThat(findWrongBracket.find(input2), is(expectedIndex2));
     }
 
 }
